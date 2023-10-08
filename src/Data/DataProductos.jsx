@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import LeeProducto from "./LeeProducto";
-import SpinnerModal from "../components/SpinnerModal";
+import SpinnerModal from "../components/Loaders/SpinnerModal";
 
 function DataProductos() {
   const [products, setProducts] = useState([]);
@@ -34,7 +34,7 @@ function DataProductos() {
       {/* spinner cargando hasta que se resuelve el fetch de la API */}
       {loading && (
         <SpinnerModal/>
-      )}
+      )}      
       <div className="container mt-3">
         <h2>Productos</h2>
         <div className="row">

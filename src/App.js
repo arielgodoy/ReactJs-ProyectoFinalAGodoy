@@ -8,7 +8,7 @@ import DetalleProducto from "./pages/DetalleProducto";
 import './App.css'
 import { CartProvider } from "./contexts/CartContext";
 import DataProductos from "./Data/DataProductos";
-
+import Detallecarrito from "./pages/Detallecarrito";
 
 function App() {
   return (
@@ -20,11 +20,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Ofertas" element={<Home />} />
         <Route path="/Avances" element={<Home />} />        
+        <Route path="/carrito" element={<Detallecarrito />} />        
         <Route path="/DetalleProducto/:productid" element={<DetalleProducto />} />
         <Route path="/categoria/" element={<DataProductos/>} />   
-        <Route path="/categoria/:categoria" element={<DataProductos/>} />   
-        
-
+        <Route path="/categoria/:categoria" element={<DataProductos/>} />  
       </Routes>
     </BrowserRouter>
     </CartProvider>

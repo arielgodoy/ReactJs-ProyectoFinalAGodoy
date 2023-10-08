@@ -1,58 +1,79 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-//import { CartProvider } from '../../contexts/CartContext';
-
-import AddToCartButton from "../components/AddToCartButton";
+import SpinnerModal from "../components/Loaders/SpinnerModal";
+import { Card, Button, Row, Col } from 'react-bootstrap';
+import axios from "axios";
+import { CartContext } from "../contexts/CartContext";
 
 const DetalleProducto = () => {
-  // Ir a buscar los datos de un pokemon y mostrarlos en pantalla
-
+  const { agregarAlCarrito } = useContext(CartContext);
+  const [cantidad, setCantidad] = useState(1);
   const [detail, setDetail] = useState();
-
   const { productid } = useParams();
+
+  const handleRestar = () => {
+    cantidad > 1 && setCantidad(cantidad - 1);
+    console.log(cantidad);
+  };
+
+  const handleSumar = () => {
+    //cantidad < detail.stock && setCantidad(cantidad + 1);
+    setCantidad(cantidad + 1);
+    console.log(cantidad);
+  };
+
+  const handleAgregar = () => {
+    agregarAlCarrito(detail, cantidad);
+  };
 
   useEffect(() => {
     const url = `https://fakestoreapi.com/products/${productid}`;
-    fetch(url)
+    axios
+      .get(url)
       .then((response) => {
-        return response.json();
+        setDetail(response.data);
       })
-      .then((data) => {
-        setDetail(data);
+      .catch((error) => {
+        console.error("Error al obtener los datos:", error);
       });
   }, [productid]);
 
-  if (!detail) return <>Cargando...</>;
-
+  if (!detail)
+    return (
+      <>
+        <SpinnerModal />
+      </>
+    );
   return (
-    <>
-      
-        <div class="container text-center">
-          <div className="row">
-            <div className="col-md-3 mx-auto">
-              <div className="card">
-                <h1 className="card-title">{detail.title}</h1>
-                <p className="card-text">{detail.description}</p>
-                <img
-                  src={detail.image}
-                  className="card-img-top img-fluid img-sm"
-                  alt={detail.title}
-                  style={{ maxWidth: "200px" }}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{detail.title}</h5>
-                  <p className="card-text">
-                    Precio: ${detail.price.toFixed(2)}
-                  </p>                  
-                  <AddToCartButton />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-    </>
+    <div className="d-flex justify-content-center">
+      <Card style={{ width: "18rem" }}>
+        <Card.Body>
+        <Card.Img variant="top" src={detail.image} />
+          <Card.Title>{detail.title}</Card.Title>
+          <Card.Text>
+            {detail.description}
+            <h3 className="card-text">Precio: ${detail.price.toFixed(2)}</h3>
+          </Card.Text>
+          <Row className="justify-content-center align-items-center">
+            <Col>
+              <Button onClick={handleRestar} variant="danger" size="sm">-</Button>
+            </Col>
+            <Col>
+              <h3>{cantidad}</h3>
+            </Col>
+            <Col>
+              <Button onClick={handleSumar} variant="success" size="sm">+</Button>
+            </Col>
+          </Row>
+          <Row>          
+          <Button onClick={handleAgregar} variant="primary" size="md">
+            Agregar al carrito
+          </Button>          
+          </Row>
+            
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
-
 export default DetalleProducto;

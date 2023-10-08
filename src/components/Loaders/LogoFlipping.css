@@ -11,7 +11,7 @@
 .flipping-logo {
     width: 100px; /* Ajusta el tamaño según tu necesidad */
     height: 100px;
-    animation: flip 0.5s infinite ease-in-out; /* Volteo durante 2 segundos de forma infinita */
+    animation: flip 1.5s infinite ease-in-out; /* Volteo durante 2 segundos de forma infinita */
 }
 
 /* Keyframes para la animación de volteo */

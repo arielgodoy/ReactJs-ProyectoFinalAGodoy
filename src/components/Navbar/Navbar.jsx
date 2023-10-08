@@ -1,15 +1,11 @@
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import logo from "./pokeball.png"; 
+import logo from "./pokeball.png";
 import Categories from "../../Data/Categories";
 import CartWidget from "../CartWidget";
 
-
-
 const Navbar = () => {
-
   return (
-    
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <NavLink className="navbar-brand" to="/">
@@ -34,12 +30,8 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-          <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                to="/"               
-                
-              >
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/">
                 Inicio
               </NavLink>
             </li>
@@ -64,38 +56,34 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item">
-              <NavLink
-                className="nav-link disabled"
-                to="/Ofertas"
-                
-              >
+              <NavLink className="nav-link disabled" to="/Ofertas">
                 Ofertas
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-link disabled"
-                to="/Avance"
-                
-              >
+              <NavLink className="nav-link disabled" to="/Avance">
                 Avance de Temporada
               </NavLink>
             </li>
-            
 
             <li className="nav-item">
-              <NavLink 
-              className="nav-link" 
-              to="/Carrito">
-              <CartWidget/>
+              <NavLink className="nav-link" to="/Carrito">
+                
               </NavLink>
+            </li>
+            <li className="nav-item">
+              
+              <NavLink className="nav-link" to="/Carrito">
+                <i className="fa fa-shopping-cart"></i>{" "}               
+                
+                <CartWidget />
+                </NavLink>
 
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    
   );
 };
 export default Navbar;
