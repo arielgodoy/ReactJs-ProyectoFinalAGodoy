@@ -5,9 +5,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min'; // Importar el archivo JavaScri
 import 'font-awesome/css/font-awesome.min.css';
 import Navbar from "./components/Navbar/Navbar";
 import DetalleProducto from "./pages/DetalleProducto";
-import DataProductosFiltered from "./Data/DataProductosFiltered";
 import './App.css'
 import { CartProvider } from "./contexts/CartContext";
+import DataProductos from "./Data/DataProductos";
 
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
         <Route path="/Ofertas" element={<Home />} />
         <Route path="/Avances" element={<Home />} />        
         <Route path="/DetalleProducto/:productid" element={<DetalleProducto />} />
-        <Route path="/categoria/" element={<DataProductosFiltered/>} />   
-        <Route path="/categoria/:categoria" element={<DataProductosFiltered/>} />   
+        <Route path="/categoria/" element={<DataProductos/>} />   
+        <Route path="/categoria/:categoria" element={<DataProductos/>} />   
         
 
       </Routes>
