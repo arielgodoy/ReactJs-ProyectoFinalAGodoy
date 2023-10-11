@@ -1,17 +1,17 @@
 import React from "react";
 import { Modal} from "react-bootstrap";
-import logo from "../Navbar/pokeball.png";
-import './../Loaders/LogoFlipping.css'
+import logo from "./logo.png";
+import './SpinnerModal.css'
 
 function SpinnerModal() {
   return (
     <div>
       <Modal show={true} centered >
         <Modal.Body>          
-          <div class="logo-container">
-          <img src={logo} alt="Logo flipping" class="flipping-logo"/>
+          <div className="logo-container">
+          <img src={logo} alt="Logo flipping" className="flipping-logo"/>
           <br/>
-          <p class="loading-text">Cargando datos</p>
+          <p className="loading-text">Cargando datos</p>
           </div>
         </Modal.Body>
       </Modal>

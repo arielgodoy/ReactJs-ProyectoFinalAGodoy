@@ -1,11 +1,11 @@
 import React from 'react';
-import DataProductos from '../../Data/DataProductos';
+import GetDataProductos from './GetDataProductos';
 
 function ItemListContainer() {
 
   return (
     <>    
-      <DataProductos />
+      <GetDataProductos />
     </>
 
   );

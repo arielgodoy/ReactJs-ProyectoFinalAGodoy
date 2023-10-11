@@ -7,7 +7,7 @@ const CartWidget = () => {
   
   return (    
     <>
-      <i class="fa-solid fa-cart-shopping"></i>        
+      <i className="fa-solid fa-cart-shopping"></i>        
       <span>{cantidadEnCarrito()} US${precioTotal()}</span>
       
     </>    

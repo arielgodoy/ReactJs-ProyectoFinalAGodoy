@@ -3,12 +3,15 @@ import Home from "./pages/Home";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importar el archivo CSS de Bootstrap
 import 'bootstrap/dist/js/bootstrap.bundle.min'; // Importar el archivo JavaScript de Bootstrap
 import 'font-awesome/css/font-awesome.min.css';
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar";
 import DetalleProducto from "./pages/DetalleProducto";
 import './App.css'
 import { CartProvider } from "./contexts/CartContext";
-import DataProductos from "./Data/DataProductos";
+import DataProductos from "./components/GetDataProductos";
 import Detallecarrito from "./pages/Detallecarrito";
+import withAuth from '../src/hocs/withAuth'; // Ajusta la ruta correcta según tu estructura de archivos
+import Profile from './components/Profile'; // Ajusta la ruta correcta según tu estructura de archivos
+
 
 function App() {
   return (

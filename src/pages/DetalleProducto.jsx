@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import SpinnerModal from "../components/Loaders/SpinnerModal";
+import SpinnerModal from "../components/SpinnerModal";
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import axios from "axios";
 import { CartContext } from "../contexts/CartContext";

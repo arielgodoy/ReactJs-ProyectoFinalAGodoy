@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import LeeProducto from "./LeeProducto";
-import SpinnerModal from "../components/Loaders/SpinnerModal";
+import GetLeeProducto from "./GetLeeProducto";
+import SpinnerModal from "./SpinnerModal";
 
-function DataProductos() {
+function GetDataProductos() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { categoria } = useParams();
 
   useEffect(() => {
     // Función para obtener los productos desde la FakeStore API
+    // si categoria esta vacia carga prudctos en general
     const fetchProducts = async () => {
       try {
-        setLoading(true);
-        // Aquí puedes agregar lógica adicional antes de la solicitud si es necesario. 
+        setLoading(true);        
         console.log(categoria);
         const url = categoria ? `https://fakestoreapi.com/products/category/${categoria}` : 'https://fakestoreapi.com/products'
         const response = await axios.get(url);
@@ -23,9 +23,7 @@ function DataProductos() {
       } catch (error) {
         console.error("Error fetching products:", error);
       }
-    };
-
-    // Llamar a la función para obtener los productos
+    };    
     fetchProducts();
   }, [categoria]);
 
@@ -40,7 +38,7 @@ function DataProductos() {
         <div className="row">
           {!loading &&
             products.map((prod) => (
-              <LeeProducto producto={prod} key={prod.id} />
+              <GetLeeProducto producto={prod} key={prod.id} />
             ))}
         </div>
       </div>
@@ -48,4 +46,4 @@ function DataProductos() {
   );
 }
 
-export default DataProductos;
+export default GetDataProductos;

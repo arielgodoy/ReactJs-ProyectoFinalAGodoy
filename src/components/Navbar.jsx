@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import logo from "./pokeball.png";
-import Categories from "../../Data/Categories";
-import CartWidget from "../CartWidget";
+import logo from "./logo.png";
+import CartWidget from "./CartWidget";
+import GetCategories from "./GetCategories";
 
 const Navbar = () => {
   return (
@@ -51,7 +51,7 @@ const Navbar = () => {
                 className="dropdown-menu"
                 aria-labelledby="productoCategoriaDropdown"
               >
-                <Categories />
+                <GetCategories />
               </div>
             </li>
 
