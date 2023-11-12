@@ -51,7 +51,7 @@ const Navbar = () => {
                 className="dropdown-menu"
                 aria-labelledby="productoCategoriaDropdown"
               >
-                <GetCategories />
+                 <GetCategories />
               </div>
             </li>
 

@@ -11,6 +11,8 @@ import DataProductos from "./components/GetDataProductos";
 import Detallecarrito from "./pages/Detallecarrito";
 import withAuth from '../src/hocs/withAuth'; // Ajusta la ruta correcta según tu estructura de archivos
 import Profile from './components/Profile'; // Ajusta la ruta correcta según tu estructura de archivos
+import AddItem from "./components/addItem";
+
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/DetalleProducto/:productid" element={<DetalleProducto />} />
         <Route path="/categoria/" element={<DataProductos/>} />   
         <Route path="/categoria/:categoria" element={<DataProductos/>} />  
+        <Route path="/add/item" element={<AddItem/>} />  
+
       </Routes>
     </BrowserRouter>
     </CartProvider>

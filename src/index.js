@@ -1,27 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+// index.js
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import App from "./App";
 
+const Root = () => {
+  useEffect(() => {    
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  }, []); 
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDOHIgPDY2xOkkjTLGzdv49-u6GiRCHFP8",
-  authDomain: "react-coderhouse-a21f2.firebaseapp.com",
-  projectId: "react-coderhouse-a21f2",
-  storageBucket: "react-coderhouse-a21f2.appspot.com",
-  messagingSenderId: "1089341784908",
-  appId: "1:1089341784908:web:65083f0c923f393283c5e9",
-  measurementId: "G-0ZRE50CCK2"
+  return <div>Loading...</div>; 
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-
-
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+ReactDOM.render(<Root />, document.getElementById("root"));

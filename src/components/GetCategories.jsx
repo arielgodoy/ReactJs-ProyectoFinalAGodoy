@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../index";
+import { db } from "../services/firebase"; // Adjust the path accordingly
 
 function GetCategories() {
   const [categories, setCategories] = useState([]);
@@ -15,7 +15,9 @@ function GetCategories() {
         setCategories(
           resp.docs.map((doc) => {
             console.log(doc.data().category)            
-            return { ...doc.data(), nombre: doc.category,id: doc.id };
+            //return { ...doc.data(), nombre: doc.category,id: doc.id };
+            return { ...doc.data(), nombre: doc.data().category, id: doc.id };
+
           })
         );
       });

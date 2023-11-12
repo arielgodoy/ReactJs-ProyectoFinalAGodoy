@@ -2,8 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import SpinnerModal from "../components/SpinnerModal";
 import { Card, Button, Row, Col } from 'react-bootstrap';
-import axios from "axios";
 import { CartContext } from "../contexts/CartContext";
+import { db } from "../services/firebase";
+import { collection,query,where,getDocs  } from 'firebase/firestore';
 
 const DetalleProducto = () => {
   const { agregarAlCarrito } = useContext(CartContext);
@@ -16,8 +17,7 @@ const DetalleProducto = () => {
     console.log(cantidad);
   };
 
-  const handleSumar = () => {
-    //cantidad < detail.stock && setCantidad(cantidad + 1);
+  const handleSumar = () => {    
     setCantidad(cantidad + 1);
     console.log(cantidad);
   };
@@ -27,15 +27,26 @@ const DetalleProducto = () => {
   };
 
   useEffect(() => {
-    const url = `https://fakestoreapi.com/products/${productid}`;
-    axios
-      .get(url)
-      .then((response) => {
-        setDetail(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos:", error);
-      });
+    const fetchProductDetailFromFirestore = async () => {
+      try {       
+        
+        const itemsCollection = collection(db, 'items');
+        const productQuery = query(itemsCollection, where('id', '==', parseInt(productid)));
+        const querySnapshot = await getDocs(productQuery);
+  
+        if (querySnapshot.size === 1) {
+          // Si hay exactamente un documento que coincide con el ID
+          const productDocSnapshot = querySnapshot.docs[0];
+          setDetail({ id: productDocSnapshot.id, ...productDocSnapshot.data() });
+        } else {
+          console.error('El producto no existe en Firestore o hay duplicados.');
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos desde Firestore:', error);
+      }
+    };
+  
+    fetchProductDetailFromFirestore();
   }, [productid]);
 
   if (!detail)
