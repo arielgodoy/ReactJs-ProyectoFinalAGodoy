@@ -1,6 +1,6 @@
 import { useNavigate  } from 'react-router-dom';
 import React from 'react'
-import { itemServices } from "../services/items";
+//import { itemServices } from "../services/items";
 
 const GetLeeProducto =  ( { producto } )=> {
     const navigate = useNavigate();    
@@ -8,9 +8,9 @@ const GetLeeProducto =  ( { producto } )=> {
     const handleClick = () => {
         navigate(`/DetalleProducto/${producto.id}`);
     };
-    const handleFirestore = async() => {        
-        await itemServices.addItem(producto);
-    };
+    // const handleFirestore = async() => {        
+    //     await itemServices.addItem(producto);
+    // };
     return (
         <> 
         <div className="col-md-2 mb-2">
@@ -20,7 +20,7 @@ const GetLeeProducto =  ( { producto } )=> {
                     <h5 className="card-title">{producto.title}</h5>                    
                     <p className="card-text">Precio: ${producto.price.toFixed(2)}</p>
                     <button onClick={handleClick}  className="btn btn-info">Ver Detalle</button>                    
-                    <button onClick={handleFirestore}  className="btn btn-info">Agrega a Firestore</button>
+                    {/* <button onClick={handleFirestore}  className="btn btn-info">Agrega a Firestore</button> */}
                 </div>
             </div>
             </div>       

@@ -1,6 +1,10 @@
-import React, { useContext,useState } from "react";
-import { Container, Row, Col, Card, Button, Form,Modal } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
 import { CartContext } from "../contexts/CartContext";
+import SetUserModal from "../components/setusermodal";
+import { UserContext } from "../contexts/UserContext";
+
+
 
 const Detallecarrito = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,6 +20,12 @@ const Detallecarrito = () => {
     setShowModal(false); // Cierra el modal
     vaciarCarrito({});
   };
+
+  const { user } = useContext(UserContext);
+
+
+  // State to control the modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(!user.id);
 
   return (
     <>
@@ -67,36 +77,7 @@ const Detallecarrito = () => {
                           </h5>
                           <h5>US${precioTotal()}</h5>
                         </div>
-
-                        <h5 className="text-uppercase mb-3">Metodo de Envío</h5>
-
-                        <div className="mb-4 pb-2">
-                          <Form.Select className="select">
-                            <option value="1">Envio standar</option>
-                            <option value="2">Prioritario</option>
-                            <option value="3">Retira en Tienda</option>
-                          </Form.Select>
-                        </div>
-
-                        <h5 className="text-uppercase mb-3">
-                          Código Promoción
-                        </h5>
-
-                        <div className="mb-5">
-                          <div className="form-outline">
-                            <Form.Control
-                              type="text"
-                              id="form3Examplea2"
-                              className="form-control form-control-lg"
-                            />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Examplea2"
-                            >
-                              ingrese Código
-                            </label>
-                          </div>
-                        </div>
+                                       
 
                         <hr className="my-4" />
 
@@ -110,8 +91,19 @@ const Detallecarrito = () => {
                           className="btn btn-dark btn-block btn-lg"
                           data-mdb-ripple-color="dark"
                         >
-                          Proceder al Pago
+                          {user && user.nombre != null && user.correo != null ? (
+                            <p>{`User: ${user.nombre}, Correo: ${user.correo}`}</p>
+                          ) : (
+                            <>
+                              <p>Ingrese sus datos para continuar</p>
+                              <SetUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+                            </>
+                          )}
                         </Button>
+
+
+
                         <Button
                           onClick={handleOpenModal}
                           type="button"
@@ -120,6 +112,9 @@ const Detallecarrito = () => {
                         >
                           Vaciar Carrito
                         </Button>
+
+
+
                       </div>
                     </Col>
                   </Row>

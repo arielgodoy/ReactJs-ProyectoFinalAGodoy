@@ -9,9 +9,8 @@ import './App.css'
 import { CartProvider } from "./contexts/CartContext";
 import DataProductos from "./components/GetDataProductos";
 import Detallecarrito from "./pages/Detallecarrito";
-import withAuth from '../src/hocs/withAuth'; // Ajusta la ruta correcta según tu estructura de archivos
-import Profile from './components/Profile'; // Ajusta la ruta correcta según tu estructura de archivos
 import AddItem from "./components/addItem";
+import { UserProvider } from "./contexts/UserContext";
 
 
 
@@ -19,6 +18,7 @@ function App() {
   return (
     
     <CartProvider>
+      <UserProvider>
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -33,6 +33,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </UserProvider>
     </CartProvider>
   );
 }
