@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 // Create a context
 export const UserContext = createContext();
 
+
 // Create a context provider
 export const UserProvider = ({ children }) => {
   // State to store user information
@@ -34,4 +35,4 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-export default UserContext;
+
