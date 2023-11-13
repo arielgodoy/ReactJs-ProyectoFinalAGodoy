@@ -77,6 +77,7 @@ const Detallecarrito = () => {
                           </h5>
                           <h5>US${precioTotal()}</h5>
                         </div>
+
                                        
 
                         <hr className="my-4" />
