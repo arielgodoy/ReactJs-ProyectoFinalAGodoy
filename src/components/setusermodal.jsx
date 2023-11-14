@@ -1,22 +1,18 @@
 import React, { useContext, useState } from "react";
+
 import { UserContext } from "../contexts/UserContext";
 
-
-
-const SetUserModal = ({ isOpen, onClose }) => {
-  
+const SetUserModal = ({ isOpen, onClose }) => {  
+  const { user, updateUser, usuario, email } = useContext(UserContext);
   
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
-
   
-  const { updateUser } = useContext(UserContext);
-
-  
-  const handleSubmit = () => {
-      updateUser(nombre, correo);
-      onClose();
+  const handleSubmit = () => {    
+    updateUser(nombre, correo);
+    onClose();
   };
+
 
 
 

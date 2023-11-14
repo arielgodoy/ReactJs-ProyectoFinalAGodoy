@@ -1,19 +1,52 @@
 import React, { useContext, useState } from "react";
 import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import { CartContext } from "../contexts/CartContext";
+import SetUserModal from "../components/setusermodal";
+import { UserContext } from "../contexts/UserContext";
+import { db } from "../services/firebase";
+import { collection,addDoc  } from 'firebase/firestore';
+
 
 const Detallecarrito = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const {
-    carrito,
-    precioTotal,
-    vaciarCarrito,
-    cantidadEnCarrito,    
-  } = useContext(CartContext);
+  const { carrito, precioTotal, vaciarCarrito, cantidadEnCarrito } =
+    useContext(CartContext);    
+    const { user, updateUser, usuario, email } = useContext(UserContext);
 
   const handleOpenModal = () => {
     setShowModal(true);
+  };
+
+  const handleCerrarOrdenModal = async () => {
+    try {
+      // Check if user and its properties are defined
+      console.log("User Data:", user);
+      if (user && user.nombre != null && user.correo != null) {
+        // Create a new order document in Firestore
+        console.log("User Data:", user);
+        const orderRef = await addDoc(collection(db, 'orders'), {
+          user: {
+            nombre: user.nombre,
+            correo: user.correo,
+          },
+          cart: carrito,
+          total: precioTotal(),
+        });
+  
+        console.log("Order closed successfully! Order ID:", orderRef.id);
+  
+        // Empty the cart after the order is closed
+        vaciarCarrito({});
+      } else {
+        console.error("Invalid user data. Unable to close order.");
+      }
+    } catch (error) {
+      console.error("Error closing order:", error);
+    } finally {
+      // Close the modal
+      setShowModal(false);
+    }
   };
 
   const handleVaciaCarrito = () => {
@@ -21,7 +54,11 @@ const Detallecarrito = () => {
     vaciarCarrito({});
   };
 
-    
+  
+
+  // State to control the modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(!user.id);
+
   return (
     <>
       <section className="h-100 h-custom bg-light">
@@ -101,7 +138,33 @@ const Detallecarrito = () => {
                         <div className="d-flex justify-content-between mb-5">
                           <h5 className="text-uppercase">Precio Total </h5>
                           <h5>US${precioTotal()}</h5>
-                        </div>                        
+                        </div>
+
+                        <Button
+                          type="button"
+                          className="btn btn-blue btn-block btn-lg"
+                          data-mdb-ripple-color="dark"
+                          onClick={
+                            user && user.nombre != null && user.correo != null
+                              ? handleCerrarOrdenModal
+                              : (user) => {}
+                          }
+                        >
+                          {user &&
+                          user.nombre != null &&
+                          user.correo != null ? (
+                            <p>Cerrar la Orden de  {`Usuario: ${user.nombre}, Correo: ${user.correo}`}</p>
+                            
+                          ) : (
+                            <>
+                              <p>Ingrese sus datos para Cerrar la Orden</p>
+                              <SetUserModal
+                                isOpen={isModalOpen}
+                                onClose={() => setIsModalOpen(false)}
+                              />
+                            </>
+                          )}
+                        </Button>
 
                         <Button
                           onClick={handleOpenModal}
@@ -109,7 +172,7 @@ const Detallecarrito = () => {
                           className="btn btn-dark btn-block btn-lg"
                           data-mdb-ripple-color="dark"
                         >
-                          Cerrar orden / Eliminar Carrito
+                          Vaciar Carrito
                         </Button>
                       </div>
                     </Col>
