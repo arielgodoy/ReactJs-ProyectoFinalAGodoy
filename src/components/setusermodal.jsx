@@ -4,20 +4,21 @@ import { UserContext } from "../contexts/UserContext";
 
 
 const SetUserModal = ({ isOpen, onClose }) => {
-  // State to hold the input values  
+  
+  
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
 
-  // Access the context to get the updateUser function
+  
   const { updateUser } = useContext(UserContext);
 
-  // Function to handle form submission
+  
   const handleSubmit = () => {
-    // Update the user information using the context function
-    updateUser(nombre, correo);
-    // Close the modal
-    onClose();
+      updateUser(nombre, correo);
+      onClose();
   };
+
+
 
   return (
     <div style={{ display: isOpen ? "block" : "none" }}>      
@@ -29,7 +30,7 @@ const SetUserModal = ({ isOpen, onClose }) => {
         <label>Correo:</label>
         <input type="text" value={correo} onChange={(e) => setCorreo(e.target.value)} />
       </div>
-      <button onClick={handleSubmit}>Guardar</button>
+      <button onClick={handleSubmit}>Continuar....</button>
     </div>
   );
 };

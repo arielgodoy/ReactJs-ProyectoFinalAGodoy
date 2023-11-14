@@ -6,8 +6,12 @@ import { CartContext } from "../contexts/CartContext";
 import { db } from "../services/firebase";
 import { collection,query,where,getDocs  } from 'firebase/firestore';
 
+
 const DetalleProducto = () => {
   const { agregarAlCarrito } = useContext(CartContext);
+
+  
+
   const [cantidad, setCantidad] = useState(1);
   const [detail, setDetail] = useState();
   const { productid } = useParams();

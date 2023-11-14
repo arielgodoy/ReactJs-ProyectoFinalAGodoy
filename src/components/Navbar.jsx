@@ -3,6 +3,7 @@ import "./Navbar.css";
 import logo from "./logo.png";
 import CartWidget from "./CartWidget";
 import GetCategories from "./GetCategories";
+import UserWidget from "./UserWidget";
 
 const Navbar = () => {
   return (
@@ -77,6 +78,7 @@ const Navbar = () => {
                 <i className="fa fa-shopping-cart"></i>{" "}               
                 
                 <CartWidget />
+                <UserWidget/>
                 </NavLink>
 
             </li>

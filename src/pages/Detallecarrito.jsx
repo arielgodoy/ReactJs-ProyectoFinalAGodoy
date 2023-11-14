@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import { CartContext } from "../contexts/CartContext";
-import SetUserModal from "../components/setusermodal";
-import { UserContext } from "../contexts/UserContext";
-
-
 
 const Detallecarrito = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const { precioTotal, vaciarCarrito, cantidadEnCarrito } =
-    useContext(CartContext);
+  const {
+    carrito,
+    precioTotal,
+    vaciarCarrito,
+    cantidadEnCarrito,    
+  } = useContext(CartContext);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -21,12 +21,7 @@ const Detallecarrito = () => {
     vaciarCarrito({});
   };
 
-  const { user } = useContext(UserContext);
-
-
-  // State to control the modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(!user.id);
-
+    
   return (
     <>
       <section className="h-100 h-custom bg-light">
@@ -51,21 +46,44 @@ const Detallecarrito = () => {
                         </div>
                         <hr className="my-4" />
 
-                        {/* Agrega aquí tus elementos de carrito */}
-                        {/* ... */}
+                        {/* Detalles de los productos en el carrito */}
+                        <table className="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Producto</th>
+                              <th scope="col">Descripción</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Precio</th>
+                              <th scope="col">Subtotal</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {carrito.map((producto) => (
+                              <tr key={producto.id}>
+                                <td>
+                                  <a href={`/DetalleProducto/${producto.id}`}>
+                                    <img
+                                      src={producto.image}
+                                      style={{ width: "50px" }}
+                                      alt="Product"
+                                    />
+                                  </a>
+                                </td>
+                                <td>{producto.description}</td>
+                                <td>{producto.cantidad}</td>
+                                <td>US${producto.price}</td>
+                                <td>US${producto.cantidad * producto.price}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
 
                         <hr className="my-4" />
 
-                        <div className="pt-5">
-                          <h6 className="mb-0">
-                            <a href="#!" className="text-body">
-                              <i className="fas fa-long-arrow-alt-left me-2"></i>
-                              Volver al Inicio
-                            </a>
-                          </h6>
-                        </div>
+                        {/* Resto del código... */}
                       </div>
                     </Col>
+
                     <Col lg={4} className="bg-grey">
                       <div className="p-5">
                         <h3 className="fw-bold mb-5 mt-2 pt-1">Resumen</h3>
@@ -78,32 +96,12 @@ const Detallecarrito = () => {
                           <h5>US${precioTotal()}</h5>
                         </div>
 
-                                       
-
                         <hr className="my-4" />
 
                         <div className="d-flex justify-content-between mb-5">
                           <h5 className="text-uppercase">Precio Total </h5>
                           <h5>US${precioTotal()}</h5>
-                        </div>
-
-                        <Button
-                          type="button"
-                          className="btn btn-dark btn-block btn-lg"
-                          data-mdb-ripple-color="dark"
-                        >
-                          {user && user.nombre != null && user.correo != null ? (
-                            <p>{`User: ${user.nombre}, Correo: ${user.correo}`}</p>
-                          ) : (
-                            <>
-                              <p>Ingrese sus datos para continuar</p>
-                              <SetUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
-                            </>
-                          )}
-                        </Button>
-
-
+                        </div>                        
 
                         <Button
                           onClick={handleOpenModal}
@@ -111,11 +109,8 @@ const Detallecarrito = () => {
                           className="btn btn-dark btn-block btn-lg"
                           data-mdb-ripple-color="dark"
                         >
-                          Vaciar Carrito
+                          Cerrar orden / Eliminar Carrito
                         </Button>
-
-
-
                       </div>
                     </Col>
                   </Row>
