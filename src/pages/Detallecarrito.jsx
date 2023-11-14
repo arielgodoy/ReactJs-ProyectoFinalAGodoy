@@ -37,8 +37,9 @@ const Detallecarrito = () => {
         console.log("Order closed successfully! Order ID:", orderRef.id);
   
         
-        vaciarCarrito({});// vaceamos el carrtito
-        updateUser("nuevo", "usuario");//borramos datos de usuario
+        vaciarCarrito({});// vaceamos el carrtito        
+        updateUser(null, null);//borramos datos de usuario
+        window.location.reload(); // Recarga la página
       } else {
         console.error("Invalid user data. Unable to close order.");
       }
@@ -54,13 +55,13 @@ const Detallecarrito = () => {
     setShowModal(false); // Cierra el modal    
     vaciarCarrito({});
     updateUser(null, null);//borramos datos de usuario
-    
+    window.location.reload(); // Recarga la página
+    console.log(user);
   };
 
-  const handleLogout = () => {    
-    
-    updateUser(null, null);//borramos datos de usuario
-    
+  const handleLogout = () => {        
+    updateUser(null, null);//borramos datos de usuario    
+    window.location.reload(); // Recarga la página    
   };
   
 

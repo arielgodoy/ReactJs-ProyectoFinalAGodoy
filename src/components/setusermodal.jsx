@@ -23,7 +23,7 @@ const SetUserModal = ({ isOpen, onClose }) => {
         <label>Correo:</label>
         <input type="text" value={correo} onChange={(e) => setCorreo(e.target.value)} />
       </div>
-      <button onClick={handleSubmit}>Continuar....</button>
+      <button onClick={handleSubmit}>Login</button>
     </div>
   );
 };
