@@ -53,9 +53,15 @@ const Detallecarrito = () => {
   const handleVaciaCarrito = () => {
     setShowModal(false); // Cierra el modal    
     vaciarCarrito({});
+    updateUser(null, null);//borramos datos de usuario
     
   };
 
+  const handleLogout = () => {    
+    
+    updateUser(null, null);//borramos datos de usuario
+    
+  };
   
 
 
@@ -172,9 +178,15 @@ const Detallecarrito = () => {
                           onClick={handleOpenModal}
                           type="button"
                           className="btn btn-dark btn-block btn-lg"
-                          data-mdb-ripple-color="dark"
-                        >
+                          data-mdb-ripple-color="dark"                        >
                           Vaciar Carrito
+                        </Button>
+                        <Button
+                          onClick={handleLogout}
+                          type="button"
+                          className="btn btn-dark btn-block btn-lg"
+                          data-mdb-ripple-color="dark"                        >
+                          Logout
                         </Button>
                       </div>
                     </Col>
@@ -200,6 +212,8 @@ const Detallecarrito = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+
     </>
   );
 };
