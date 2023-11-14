@@ -12,7 +12,7 @@ const Detallecarrito = () => {
 
   const { carrito, precioTotal, vaciarCarrito, cantidadEnCarrito } =
     useContext(CartContext);    
-    const { user, updateUser, usuario, email } = useContext(UserContext);
+    const { user, updateUser } = useContext(UserContext);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -20,10 +20,10 @@ const Detallecarrito = () => {
 
   const handleCerrarOrdenModal = async () => {
     try {
-      // Check if user and its properties are defined
+      
       console.log("User Data:", user);
       if (user && user.nombre != null && user.correo != null) {
-        // Create a new order document in Firestore
+        
         console.log("User Data:", user);
         const orderRef = await addDoc(collection(db, 'orders'), {
           user: {
@@ -36,16 +36,16 @@ const Detallecarrito = () => {
   
         console.log("Order closed successfully! Order ID:", orderRef.id);
   
-        // Empty the cart after the order is closed
+        
         vaciarCarrito({});// vaceamos el carrtito
-        updateUser(null, null);//borramos datos de usuario
+        updateUser("nuevo", "usuario");//borramos datos de usuario
       } else {
         console.error("Invalid user data. Unable to close order.");
       }
     } catch (error) {
       console.error("Error closing order:", error);
     } finally {
-      // Close the modal
+      
       setShowModal(false);
     }
   };
@@ -58,7 +58,7 @@ const Detallecarrito = () => {
 
   
 
-  // State to control the modal visibility
+
   const [isModalOpen, setIsModalOpen] = useState(!user.id);
 
   return (
@@ -119,7 +119,7 @@ const Detallecarrito = () => {
 
                         <hr className="my-4" />
 
-                        {/* Resto del código... */}
+
                       </div>
                     </Col>
 
@@ -155,7 +155,7 @@ const Detallecarrito = () => {
                           {user &&
                           user.nombre != null &&
                           user.correo != null ? (
-                            <p>Cerrar la Orden de  {`Usuario: ${user.nombre}, Correo: ${user.correo}`}</p>
+                            <p>Cerrar la Orden de  {` Usuario: ${user.nombre}`}</p>
                             
                           ) : (
                             <>

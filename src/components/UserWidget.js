@@ -7,7 +7,12 @@ const UserWidget = () => {
   return (
     <>
       <i className="fa-solid fa-cart-shopping"></i>
-      <span>{usuario}: {email}</span>
+      {usuario() ? (
+        <span>
+          Usuario: {usuario()} Email: {email()}{" "}
+          <a href="/ver-pedidos">Ver pedidos</a>
+        </span>
+      ) : null}
     </>
   );
 };

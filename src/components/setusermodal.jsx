@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 const SetUserModal = ({ isOpen, onClose }) => {  
-  const { user, updateUser, usuario, email } = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
   
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
@@ -12,9 +12,6 @@ const SetUserModal = ({ isOpen, onClose }) => {
     updateUser(nombre, correo);
     onClose();
   };
-
-
-
 
   return (
     <div style={{ display: isOpen ? "block" : "none" }}>      

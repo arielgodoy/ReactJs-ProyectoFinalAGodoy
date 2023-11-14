@@ -7,10 +7,7 @@ export const UserContext = createContext();
 // Create a context provider
 export const UserProvider = ({ children }) => {
   // State to store user information
-  const [user, setUser] = useState({
-    nombre: null,
-    correo: null,
-  });
+  const [user, setUser] = useState({ nombre: null,correo: null,});
 
   // Function to update user information
   const updateUser = (nombre, correo) => {
@@ -30,7 +27,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser,usuario,email }}>
       {children}
     </UserContext.Provider>
   );
